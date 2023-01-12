@@ -1,4 +1,8 @@
+const balanceElement = document.querySelector('#balance')
+const expensesElement = document.querySelector('#money-minus')
+const revenuesElement = document.querySelector('#money-plus')
 const UlTransactions = document.querySelector('#transactions')
+
 const example_transactions = [
   {id: 1, name:'salário', value: 1200},
   {id: 2, name:'investimentos', value: 1000},
@@ -25,17 +29,19 @@ const updateBalance = () => {
    .map(transaction => transaction.value)
 
    const total = valuesTransactions
-   .reduce((accumulator,value)=> accumulator + value)
+   .reduce((accumulator,value)=> accumulator + value).toFixed(2)
 
-   const expenses = valuesTransactions
+   const expenses =Math.abs(valuesTransactions
    .filter(value => value < 0)
-   .reduce((accumulator,value) => accumulator + value)
+   .reduce((accumulator,value) => accumulator + value)).toFixed(2)
 
    const revenues = valuesTransactions
    .filter(value => value > 0)
-   .reduce((accumulator,value) => accumulator + value)
-   
+   .reduce((accumulator,value) => accumulator + value).toFixed(2)
 
+   balanceElement.textContent = `R$ ${total}`
+   expensesElement.textContent = `R$ ${expenses}`
+   revenuesElement.textContent = `R$ ${revenues}`
 }
 
 const init = () => {

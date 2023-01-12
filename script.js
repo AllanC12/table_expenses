@@ -2,6 +2,9 @@ const balanceElement = document.querySelector('#balance')
 const expensesElement = document.querySelector('#money-minus')
 const revenuesElement = document.querySelector('#money-plus')
 const UlTransactions = document.querySelector('#transactions')
+const form = document.querySelector('#form')
+const transactionElementName = document.querySelector('#text')
+const transactionElementValue = document.querySelector('#amount')
 
 const example_transactions = [
   {id: 1, name:'salário', value: 1200},
@@ -49,3 +52,22 @@ const init = () => {
   updateBalance()
 }
 init()
+
+const generateID = () => Math.round(Math.random() *1000)
+
+form.addEventListener('submit',event=>{
+  event.preventDefault()
+  if(transactionElementName.value.trim() === '' || transactionElementValue.value.trim() === ''){
+    alert('Preencha todos os dados da transação (Nome e valor)')
+  }
+ 
+const transaction_name = transactionElementName.value;
+const transaction_value = transactionElementValue.value
+
+const transaction = {id: generateID,name:transaction_name,value:transaction_value}
+
+example_transactions.push(transaction)
+
+init()
+
+})
